@@ -68,6 +68,57 @@ export const LandingPage: React.FC = () => {
         color: '#0f172a'
       }}
     >
+      {/* LANDING HEADER NAV (White header with image logo) */}
+      <header 
+        style={{
+          width: '100%',
+          height: '90px',
+          backgroundColor: '#ffffff',
+          borderBottom: '1px solid rgba(15, 23, 42, 0.05)',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          padding: '0 1.5rem',
+          position: 'sticky',
+          top: 0,
+          zIndex: 100
+        }}
+      >
+        <div 
+          style={{
+            width: '100%',
+            maxWidth: '1200px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between'
+          }}
+        >
+          {/* Logo with image */}
+          <div 
+            style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
+            onClick={() => setView('landing')}
+          >
+            <img 
+              src="/logo-horizonta-ff.png" 
+              alt="FarmaFlow Logo" 
+              style={{ 
+                height: '42px', 
+                objectFit: 'contain'
+              }} 
+            />
+          </div>
+
+          <div style={{ display: 'flex', gap: '0.75rem' }}>
+            <button className="btn btn-ghost" onClick={() => setView('login')} style={{ color: '#475569', fontWeight: 600 }}>
+              Ingresar
+            </button>
+            <button className="btn btn-primary" onClick={() => setView('register')} style={{ padding: '0.6rem 1.25rem', borderRadius: '8px' }}>
+              Registrarse
+            </button>
+          </div>
+        </div>
+      </header>
+
       {/* TOP BANNER WRAPPER (Hero background only) */}
       <div
         style={{
@@ -82,46 +133,6 @@ export const LandingPage: React.FC = () => {
           borderBottom: '1px solid rgba(15, 23, 42, 0.05)'
         }}
       >
-        {/* LANDING HEADER NAV */}
-      <header 
-        style={{
-          width: '100%',
-          maxWidth: '1200px',
-          height: '90px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          zIndex: 10
-        }}
-      >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <div 
-            style={{ 
-              background: 'linear-gradient(135deg, var(--primary), var(--secondary))',
-              color: 'var(--text-inverse)',
-              width: '36px',
-              height: '36px',
-              borderRadius: '8px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontWeight: 800
-            }}
-          >
-            FF
-          </div>
-          <strong style={{ fontSize: '1.25rem', fontWeight: 800, letterSpacing: '-0.5px', color: '#0f172a' }}>FarmaFlow</strong>
-        </div>
-
-        <div style={{ display: 'flex', gap: '0.75rem' }}>
-          <button className="btn btn-ghost" onClick={() => setView('login')} style={{ color: '#475569', fontWeight: 600 }}>
-            Ingresar
-          </button>
-          <button className="btn btn-primary" onClick={() => setView('register')} style={{ padding: '0.6rem 1.25rem', borderRadius: '8px' }}>
-            Registrarse
-          </button>
-        </div>
-      </header>
 
       {/* HERO SECTION - TWO COLUMN GRID */}
       <section 
