@@ -1,0 +1,14 @@
+node_modules
+dist
+dist-ssr
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.git
+.gitignore
+.vscode
+.idea
+.DS_Store
+Dockerfile
+nginx.conf
+README.md
