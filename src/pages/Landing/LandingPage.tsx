@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 import { 
   Shield, ShoppingCart, Users, BarChart3, Pill, Sparkles, 
-  ArrowRight, Check, HelpCircle, ChevronDown, Award 
+  ArrowRight, Check, HelpCircle, ChevronDown, Award, FileText
 } from 'lucide-react';
 
 export const LandingPage: React.FC = () => {
@@ -17,7 +17,6 @@ export const LandingPage: React.FC = () => {
 
   // Dynamic pricing calculation
   const calculatePrice = () => {
-    // Basic logic: base tier depends on branches + employees
     if (branches > 5 || employees > 15) {
       return { price: 149, tier: 'Enterprise', limit: 'Ilimitados' };
     } else if (branches > 1 || employees > 4) {
@@ -51,12 +50,16 @@ export const LandingPage: React.FC = () => {
   return (
     <div 
       style={{
-        backgroundColor: 'var(--bg-base)',
+        backgroundImage: 'url(/background-hero.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed',
         minHeight: '100vh',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        padding: '0 1rem'
+        padding: '0 1.5rem',
+        color: '#0f172a'
       }}
     >
       {/* LANDING HEADER NAV */}
@@ -64,12 +67,11 @@ export const LandingPage: React.FC = () => {
         style={{
           width: '100%',
           maxWidth: '1200px',
-          height: '80px',
+          height: '90px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          borderBottom: '1px solid var(--border-color)',
-          marginBottom: '2rem'
+          zIndex: 10
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
@@ -88,103 +90,464 @@ export const LandingPage: React.FC = () => {
           >
             FF
           </div>
-          <strong style={{ fontSize: '1.25rem', fontWeight: 800, letterSpacing: '-0.5px' }}>FarmaFlow</strong>
+          <strong style={{ fontSize: '1.25rem', fontWeight: 800, letterSpacing: '-0.5px', color: '#0f172a' }}>FarmaFlow</strong>
         </div>
 
         <div style={{ display: 'flex', gap: '0.75rem' }}>
-          <button className="btn btn-ghost" onClick={() => setView('login')}>
+          <button className="btn btn-ghost" onClick={() => setView('login')} style={{ color: '#475569', fontWeight: 600 }}>
             Ingresar
           </button>
-          <button className="btn btn-primary" onClick={() => setView('register')}>
+          <button className="btn btn-primary" onClick={() => setView('register')} style={{ padding: '0.6rem 1.25rem', borderRadius: '8px' }}>
             Registrarse
           </button>
         </div>
       </header>
 
-      {/* HERO SECTION */}
+      {/* HERO SECTION - TWO COLUMN GRID */}
       <section 
         style={{
           width: '100%',
-          maxWidth: '1000px',
-          textAlign: 'center',
-          padding: '5rem 2rem',
-          display: 'flex',
-          flexDirection: 'column',
+          maxWidth: '1200px',
+          padding: '3rem 0 5rem 0',
+          display: 'grid',
+          gridTemplateColumns: '1fr 1.15fr',
+          gap: '3rem',
           alignItems: 'center',
-          gap: '1.5rem',
-          backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.82)), url(/background-hero.png)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          borderRadius: 'var(--radius-xl)',
-          border: '1px solid var(--border-color)',
-          boxShadow: 'var(--shadow-md)',
-          marginTop: '1rem'
+          zIndex: 10
         }}
+        className="hero-grid"
       >
-        <div 
-          className="badge badge-success flex-align pulse-glow"
-          style={{ 
-            padding: '0.5rem 1rem', 
-            fontSize: '0.8125rem',
-            background: 'rgba(16, 185, 129, 0.1)',
-            borderColor: 'var(--primary)'
-          }}
-        >
-          <Sparkles size={14} style={{ color: 'var(--primary)' }} />
-          <span>SaaS de Próxima Generación para Farmacias</span>
-        </div>
-
-        <h1 
-          style={{ 
-            fontSize: '3.5rem', 
-            fontWeight: 800, 
-            lineHeight: 1.15,
-            letterSpacing: '-1.5px',
-            background: 'linear-gradient(180deg, var(--text-primary) 30%, var(--text-secondary) 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            maxWidth: '800px',
-            margin: '0.5rem 0'
-          }}
-        >
-          Controla tu Inventario, Ventas y Personal en una Sola Interfaz
-        </h1>
-
-        <p 
-          style={{ 
-            fontSize: '1.125rem', 
-            color: 'var(--text-secondary)', 
-            maxWidth: '650px',
-            lineHeight: 1.6
-          }}
-        >
-          Diseñado para farmacias modernas de cualquier tamaño. Centraliza el stock con alertas inteligentes, factura rápidamente con descuentos de obras sociales y supervisa a tus vendedores en tiempo real.
-        </p>
-
+        {/* LEFT COLUMN: Texts and Buttons */}
         <div 
           style={{ 
             display: 'flex', 
-            gap: '1rem', 
-            marginTop: '1rem',
-            flexWrap: 'wrap',
-            justifyContent: 'center'
+            flexDirection: 'column', 
+            alignItems: 'flex-start', 
+            gap: '1.5rem',
+            textAlign: 'left'
           }}
+          className="hero-left-content"
         >
-          <button 
-            className="btn btn-primary btn-large" 
-            style={{ padding: '0.875rem 2rem', fontSize: '1rem' }}
-            onClick={() => setView('register')}
+          {/* Badge */}
+          <div 
+            className="badge badge-success flex-align"
+            style={{ 
+              padding: '0.4rem 0.8rem', 
+              fontSize: '0.75rem',
+              background: 'rgba(16, 185, 129, 0.08)',
+              borderColor: 'rgba(16, 185, 129, 0.3)',
+              borderRadius: '999px',
+              color: 'var(--primary)',
+              fontWeight: 600,
+              textTransform: 'uppercase',
+              letterSpacing: '0.05em'
+            }}
           >
-            <span>Crear mi Cuenta Demo</span>
-            <ArrowRight size={18} />
-          </button>
-          <button 
-            className="btn btn-secondary btn-large" 
-            style={{ padding: '0.875rem 2rem', fontSize: '1rem' }}
-            onClick={() => setView('login')}
+            <Sparkles size={12} style={{ color: 'var(--primary)' }} />
+            <span>SaaS de próxima generación para farmacias</span>
+          </div>
+
+          {/* H1 Title in Lowercase structure matching the mockup */}
+          <h1 
+            style={{ 
+              fontSize: '3.4rem', 
+              fontWeight: 800, 
+              lineHeight: 1.15,
+              letterSpacing: '-1.5px',
+              color: '#0f172a',
+              margin: 0,
+              maxWidth: '550px'
+            }}
           >
-            <span>Probar la Consola</span>
-          </button>
+            Controla tu inventario, ventas y personal en <span style={{ color: '#10b981' }}>una sola interfaz</span>
+          </h1>
+
+          {/* Subtitle description */}
+          <p 
+            style={{ 
+              fontSize: '1rem', 
+              color: '#475569', 
+              maxWidth: '460px',
+              lineHeight: 1.6,
+              margin: 0
+            }}
+          >
+            Diseñado para farmacias modernas de cualquier tamaño. Centraliza el stock con alertas inteligentes, factura rápidamente con descuentos de obras sociales y supervisa a tus vendedores en tiempo real.
+          </p>
+
+          {/* CTA Buttons */}
+          <div 
+            style={{ 
+              display: 'flex', 
+              gap: '1rem', 
+              marginTop: '0.5rem',
+              flexWrap: 'wrap'
+            }}
+          >
+            <button 
+              className="btn btn-primary" 
+              style={{ padding: '0.8rem 1.75rem', fontSize: '0.9375rem', borderRadius: '10px' }}
+              onClick={() => setView('register')}
+            >
+              <span>Crear mi Cuenta Demo</span>
+              <ArrowRight size={16} />
+            </button>
+            <button 
+              className="btn btn-secondary" 
+              style={{ padding: '0.8rem 1.75rem', fontSize: '0.9375rem', borderRadius: '10px', background: '#ffffff', border: '1px solid rgba(15,23,42,0.08)', color: '#0f172a' }}
+              onClick={() => setView('login')}
+            >
+              <span>Probar la Consola</span>
+            </button>
+          </div>
+
+          {/* Mini-features bottom row */}
+          <div 
+            style={{
+              display: 'flex',
+              gap: '1.5rem',
+              marginTop: '1.5rem',
+              width: '100%',
+              borderTop: '1px solid rgba(15,23,42,0.06)',
+              paddingTop: '1.5rem'
+            }}
+            className="hero-features"
+          >
+            {/* feature 1 */}
+            <div className="flex-align" style={{ gap: '0.5rem' }}>
+              <div 
+                style={{ 
+                  background: 'rgba(16, 185, 129, 0.08)', 
+                  color: 'var(--primary)',
+                  width: '32px',
+                  height: '32px',
+                  borderRadius: '50%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0
+                }}
+              >
+                <Pill size={14} />
+              </div>
+              <div>
+                <strong style={{ display: 'block', fontSize: '0.8125rem', color: '#0f172a', fontWeight: 700 }}>Inventario inteligente</strong>
+                <span style={{ fontSize: '0.6875rem', color: '#64748b' }}>Stock siempre actualizado</span>
+              </div>
+            </div>
+
+            {/* feature 2 */}
+            <div className="flex-align" style={{ gap: '0.5rem' }}>
+              <div 
+                style={{ 
+                  background: 'rgba(16, 185, 129, 0.08)', 
+                  color: 'var(--primary)',
+                  width: '32px',
+                  height: '32px',
+                  borderRadius: '50%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0
+                }}
+              >
+                <FileText size={14} />
+              </div>
+              <div>
+                <strong style={{ display: 'block', fontSize: '0.8125rem', color: '#0f172a', fontWeight: 700 }}>Facturación ágil</strong>
+                <span style={{ fontSize: '0.6875rem', color: '#64748b' }}>Obras sociales y obras</span>
+              </div>
+            </div>
+
+            {/* feature 3 */}
+            <div className="flex-align" style={{ gap: '0.5rem' }}>
+              <div 
+                style={{ 
+                  background: 'rgba(16, 185, 129, 0.08)', 
+                  color: 'var(--primary)',
+                  width: '32px',
+                  height: '32px',
+                  borderRadius: '50%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0
+                }}
+              >
+                <Users size={14} />
+              </div>
+              <div>
+                <strong style={{ display: 'block', fontSize: '0.8125rem', color: '#0f172a', fontWeight: 700 }}>Control de personal</strong>
+                <span style={{ fontSize: '0.6875rem', color: '#64748b' }}>Rendimiento en tiempo real</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        {/* RIGHT COLUMN: The Floating Console Dashboard Simulator */}
+        <div 
+          style={{ 
+            position: 'relative',
+            width: '100%',
+            height: '420px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 5
+          }}
+          className="hero-right-console"
+        >
+          {/* Main Console Box */}
+          <div 
+            style={{
+              width: '560px',
+              height: '350px',
+              backgroundColor: '#ffffff',
+              borderRadius: '12px',
+              border: '1px solid rgba(15, 23, 42, 0.06)',
+              boxShadow: '0 20px 50px -12px rgba(15, 23, 42, 0.12)',
+              display: 'flex',
+              overflow: 'hidden',
+              fontFamily: 'var(--font-sans)',
+              zIndex: 1
+            }}
+          >
+            {/* Sidebar of the Mock Console */}
+            <div 
+              style={{
+                width: '125px',
+                background: '#f8fafc',
+                borderRight: '1px solid rgba(15, 23, 42, 0.05)',
+                padding: '0.8rem',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '0.25rem',
+                flexShrink: 0
+              }}
+            >
+              {/* Logo block */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', marginBottom: '0.8rem' }}>
+                <div style={{ width: '16px', height: '16px', background: 'var(--primary)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '4px', fontSize: '0.55rem', fontWeight: 900 }}>FF</div>
+                <strong style={{ fontSize: '0.6875rem', color: '#0f172a' }}>FarmaFlow</strong>
+              </div>
+
+              {/* Sidebar items list */}
+              {([
+                { name: 'Inicio', active: true },
+                { name: 'Inventario' },
+                { name: 'Ventas' },
+                { name: 'Compras' },
+                { name: 'Clientes' },
+                { name: 'Proveedores' },
+                { name: 'Personal' },
+                { name: 'Reportes' },
+                { name: 'Configuración' }
+              ] as any[]).map((item, idx) => (
+                <div 
+                  key={idx}
+                  style={{
+                    padding: '0.35rem 0.5rem',
+                    borderRadius: '6px',
+                    fontSize: '0.625rem',
+                    fontWeight: 600,
+                    cursor: 'pointer',
+                    color: item.active ? 'var(--primary)' : '#64748b',
+                    background: item.active ? 'rgba(16, 185, 129, 0.08)' : 'transparent',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.35rem'
+                  }}
+                >
+                  <div style={{ width: '4px', height: '4px', borderRadius: '50%', backgroundColor: item.active ? 'var(--primary)' : 'transparent' }} />
+                  {item.name}
+                </div>
+              ))}
+            </div>
+
+            {/* Main content of the Mock Console */}
+            <div 
+              style={{
+                flex: 1,
+                padding: '0.8rem',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '0.6rem',
+                minWidth: 0
+              }}
+            >
+              {/* Card Header inside mock console */}
+              <div className="flex-between">
+                <span style={{ fontSize: '0.6875rem', fontWeight: 800, color: '#0f172a' }}>Resumen general</span>
+                <span style={{ fontSize: '0.55rem', color: '#64748b', background: 'rgba(0,0,0,0.03)', padding: '0.15rem 0.35rem', borderRadius: '4px' }}>Hoy, 24 May 2024</span>
+              </div>
+
+              {/* 4 Stat Boxes inside console */}
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '0.35rem' }}>
+                {/* stat 1 */}
+                <div style={{ background: '#f8fafc', border: '1px solid rgba(15,23,42,0.03)', padding: '0.35rem', borderRadius: '6px' }}>
+                  <span style={{ fontSize: '0.5rem', color: '#64748b', display: 'block' }}>Ventas del día</span>
+                  <strong style={{ fontSize: '0.65rem', color: '#0f172a', display: 'block', margin: '0.1rem 0' }}>$ 1.248.600</strong>
+                  <span style={{ fontSize: '0.45rem', color: '#10b981', fontWeight: 600 }}>+12.5% vs ayer</span>
+                </div>
+                
+                {/* stat 2 */}
+                <div style={{ background: '#f8fafc', border: '1px solid rgba(15,23,42,0.03)', padding: '0.35rem', borderRadius: '6px' }}>
+                  <span style={{ fontSize: '0.5rem', color: '#64748b', display: 'block' }}>Órdenes</span>
+                  <strong style={{ fontSize: '0.65rem', color: '#0f172a', display: 'block', margin: '0.1rem 0' }}>156</strong>
+                  <span style={{ fontSize: '0.45rem', color: '#10b981', fontWeight: 600 }}>+8.3% vs ayer</span>
+                </div>
+
+                {/* stat 3 */}
+                <div style={{ background: '#f8fafc', border: '1px solid rgba(15,23,42,0.03)', padding: '0.35rem', borderRadius: '6px' }}>
+                  <span style={{ fontSize: '0.5rem', color: '#64748b', display: 'block' }}>Productos</span>
+                  <strong style={{ fontSize: '0.65rem', color: '#0f172a', display: 'block', margin: '0.1rem 0' }}>2.341</strong>
+                  <span style={{ fontSize: '0.45rem', color: '#10b981', fontWeight: 600 }}>+3.1% vs ayer</span>
+                </div>
+
+                {/* stat 4 */}
+                <div style={{ background: '#f8fafc', border: '1px solid rgba(15,23,42,0.03)', padding: '0.35rem', borderRadius: '6px' }}>
+                  <span style={{ fontSize: '0.5rem', color: '#64748b', display: 'block' }}>Stock bajo</span>
+                  <strong style={{ fontSize: '0.65rem', color: '#ef4444', display: 'block', margin: '0.1rem 0' }}>23</strong>
+                  <span style={{ fontSize: '0.45rem', color: '#ef4444', fontWeight: 600 }}>Ver alertas</span>
+                </div>
+              </div>
+
+              {/* Split lower panel (Chart left, Top products list right) */}
+              <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: '0.6rem', flex: 1, minHeight: 0 }}>
+                {/* Chart Box */}
+                <div style={{ border: '1px solid rgba(15,23,42,0.04)', borderRadius: '8px', padding: '0.5rem', display: 'flex', flexDirection: 'column' }}>
+                  <div className="flex-between">
+                    <span style={{ fontSize: '0.55rem', fontWeight: 700, color: '#0f172a' }}>Ventas de los últimos 7 días</span>
+                    <span style={{ fontSize: '0.45rem', color: '#64748b' }}>Ventas ▼</span>
+                  </div>
+                  {/* SVG Chart */}
+                  <div style={{ flex: 1, minHeight: 0, marginTop: '0.25rem' }}>
+                    <svg viewBox="0 0 200 65" width="100%" height="100%" preserveAspectRatio="none">
+                      <defs>
+                        <linearGradient id="c-grad" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="0%" stopColor="#10b981" stopOpacity="0.2" />
+                          <stop offset="100%" stopColor="#10b981" stopOpacity="0" />
+                        </linearGradient>
+                      </defs>
+                      <path d="M 5 55 Q 35 45, 65 52 T 125 25 T 165 30 T 195 10 L 195 65 L 5 65 Z" fill="url(#c-grad)" />
+                      <path d="M 5 55 Q 35 45, 65 52 T 125 25 T 165 30 T 195 10" fill="none" stroke="#10b981" strokeWidth="1.5" strokeLinecap="round" />
+                      <circle cx="125" cy="25" r="1.5" fill="#ffffff" stroke="#10b981" strokeWidth="1" />
+                      <circle cx="195" cy="10" r="1.5" fill="#ffffff" stroke="#10b981" strokeWidth="1" />
+                    </svg>
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.45rem', color: '#94a3b8', marginTop: '0.15rem' }}>
+                    <span>18 May</span>
+                    <span>20 May</span>
+                    <span>22 May</span>
+                    <span>24 May</span>
+                  </div>
+                </div>
+
+                {/* Top products list */}
+                <div style={{ border: '1px solid rgba(15,23,42,0.04)', borderRadius: '8px', padding: '0.5rem', display: 'flex', flexDirection: 'column' }}>
+                  <div className="flex-between" style={{ borderBottom: '1px solid rgba(15,23,42,0.04)', paddingBottom: '0.2rem', marginBottom: '0.25rem' }}>
+                    <span style={{ fontSize: '0.55rem', fontWeight: 700, color: '#0f172a' }}>Top productos</span>
+                    <span style={{ fontSize: '0.45rem', color: '#10b981', fontWeight: 600 }}>Ver todos</span>
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem', flex: 1, justifyContent: 'space-between', fontSize: '0.5rem' }}>
+                    {[
+                      { name: 'Amoxicilina 500mg', qty: '320 u.' },
+                      { name: 'Ibuprofeno 400mg', qty: '280 u.' },
+                      { name: 'Losartán 50mg', qty: '215 u.' },
+                      { name: 'Paracetamol 500mg', qty: '190 u.' },
+                      { name: 'Omeprazol 20mg', qty: '175 u.' }
+                    ].map((p, idx) => (
+                      <div key={idx} className="flex-between" style={{ color: '#475569' }}>
+                        <span style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+                          <span style={{ width: '4px', height: '4px', borderRadius: '50%', backgroundColor: '#cbd5e1' }} />
+                          {p.name}
+                        </span>
+                        <strong style={{ color: '#0f172a' }}>{p.qty}</strong>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* FLOATING CARD 1: Alertas de stock */}
+          <div 
+            style={{
+              position: 'absolute',
+              bottom: '5px',
+              left: '0px',
+              width: '190px',
+              backgroundColor: '#ffffff',
+              borderRadius: '10px',
+              padding: '0.6rem 0.8rem',
+              border: '1px solid rgba(15, 23, 42, 0.05)',
+              boxShadow: '0 10px 25px -5px rgba(15, 23, 42, 0.08)',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '0.4rem',
+              zIndex: 2
+            }}
+          >
+            <div className="flex-between" style={{ borderBottom: '1px solid rgba(15,23,42,0.04)', paddingBottom: '0.2rem' }}>
+              <span style={{ fontSize: '0.55rem', fontWeight: 800, color: '#0f172a', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+                🔔 Alertas de stock
+              </span>
+              <span style={{ fontSize: '0.45rem', color: '#10b981' }}>Ver todas</span>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem', fontSize: '0.5rem' }}>
+              {[
+                { name: 'Enalapril 10mg', stock: '8 u.' },
+                { name: 'Salbutamol Inhalador', stock: '5 u.' },
+                { name: 'Diclofenac 50mg', stock: '12 u.' }
+              ].map((item, idx) => (
+                <div key={idx} className="flex-between">
+                  <span style={{ color: '#475569' }}>{item.name}</span>
+                  <span style={{ color: '#ef4444', fontWeight: 'bold' }}>Stock actual: {item.stock}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* FLOATING CARD 2: Actividad del personal */}
+          <div 
+            style={{
+              position: 'absolute',
+              bottom: '-15px',
+              right: '-10px',
+              width: '200px',
+              backgroundColor: '#ffffff',
+              borderRadius: '10px',
+              padding: '0.6rem 0.8rem',
+              border: '1px solid rgba(15, 23, 42, 0.05)',
+              boxShadow: '0 10px 25px -5px rgba(15, 23, 42, 0.08)',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '0.4rem',
+              zIndex: 2
+            }}
+          >
+            <div className="flex-between" style={{ borderBottom: '1px solid rgba(15,23,42,0.04)', paddingBottom: '0.2rem' }}>
+              <span style={{ fontSize: '0.55rem', fontWeight: 800, color: '#0f172a', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+                👥 Actividad del personal
+              </span>
+              <span style={{ fontSize: '0.45rem', color: '#10b981' }}>Ver reporte</span>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.3rem', fontSize: '0.5rem' }}>
+              {[
+                { name: 'María González', amt: '$ 528.400' },
+                { name: 'Juan Pérez', amt: '$ 412.200' },
+                { name: 'Lucía Fernández', amt: '$ 308.700' }
+              ].map((item, idx) => (
+                <div key={idx} className="flex-between" style={{ color: '#475569' }}>
+                  <span>{item.name}</span>
+                  <strong style={{ color: '#0f172a' }}>{item.amt} ↗</strong>
+                </div>
+              ))}
+            </div>
+          </div>
+
         </div>
       </section>
 
@@ -448,6 +811,37 @@ export const LandingPage: React.FC = () => {
           Prototipo de alta fidelidad construido en React y optimizado para visualizaciones cliente.
         </div>
       </footer>
+
+      {/* Responsive styles injected to ensure grid collapse on tablets and mobiles */}
+      <style>{`
+        @media (max-width: 1024px) {
+          .hero-grid {
+            grid-template-columns: 1fr !important;
+            text-align: center !important;
+            gap: 2rem !important;
+            padding-bottom: 2rem !important;
+          }
+          .hero-left-content {
+            align-items: center !important;
+            text-align: center !important;
+          }
+          .hero-left-content h1 {
+            font-size: 2.5rem !important;
+            text-align: center !important;
+          }
+          .hero-left-content p {
+            text-align: center !important;
+          }
+          .hero-right-console {
+            display: none !important; /* Esconde la consola mock en celulares para evitar desbordes */
+          }
+          .hero-features {
+            flex-direction: column !important;
+            align-items: center !important;
+            gap: 1rem !important;
+          }
+        }
+      `}</style>
     </div>
   );
 };
