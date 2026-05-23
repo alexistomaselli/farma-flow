@@ -50,19 +50,30 @@ export const LandingPage: React.FC = () => {
   return (
     <div 
       style={{
-        backgroundImage: 'url(/background-hero.png)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundAttachment: 'fixed',
+        backgroundColor: '#ffffff',
         minHeight: '100vh',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        padding: '0 1.5rem',
+        width: '100%',
         color: '#0f172a'
       }}
     >
-      {/* LANDING HEADER NAV */}
+      {/* TOP BANNER WRAPPER (Hero background only) */}
+      <div
+        style={{
+          backgroundImage: 'url(/background-hero.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          width: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          padding: '0 1.5rem',
+          borderBottom: '1px solid rgba(15, 23, 42, 0.05)'
+        }}
+      >
+        {/* LANDING HEADER NAV */}
       <header 
         style={{
           width: '100%',
@@ -550,6 +561,7 @@ export const LandingPage: React.FC = () => {
 
         </div>
       </section>
+      </div>
 
       {/* CORE FEATURES GRID */}
       <section 
