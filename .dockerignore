@@ -9,6 +9,4 @@ yarn-error.log*
 .vscode
 .idea
 .DS_Store
-Dockerfile
-nginx.conf
 README.md
