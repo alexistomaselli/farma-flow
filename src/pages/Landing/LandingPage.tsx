@@ -107,11 +107,18 @@ export const LandingPage: React.FC = () => {
           width: '100%',
           maxWidth: '1000px',
           textAlign: 'center',
-          padding: '4rem 1rem',
+          padding: '5rem 2rem',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          gap: '1.5rem'
+          gap: '1.5rem',
+          backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.82)), url(/background-hero.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          borderRadius: 'var(--radius-xl)',
+          border: '1px solid var(--border-color)',
+          boxShadow: 'var(--shadow-md)',
+          marginTop: '1rem'
         }}
       >
         <div 
