@@ -15,6 +15,15 @@ export const LandingPage: React.FC = () => {
   // FAQ accordion active state
   const [faqActive, setFaqActive] = useState<number | null>(null);
 
+  // Set body background to white on mount, and restore on unmount
+  React.useEffect(() => {
+    const originalBg = document.body.style.backgroundColor;
+    document.body.style.backgroundColor = '#ffffff';
+    return () => {
+      document.body.style.backgroundColor = originalBg;
+    };
+  }, []);
+
   // Dynamic pricing calculation
   const calculatePrice = () => {
     if (branches > 5 || employees > 15) {
@@ -687,8 +696,8 @@ export const LandingPage: React.FC = () => {
         {/* Dynamic Calculator Output */}
         <div 
           style={{
-            background: 'rgba(255, 255, 255, 0.02)',
-            border: '1px dashed var(--border-color)',
+            background: 'rgba(16, 185, 129, 0.04)',
+            border: '1px dashed rgba(16, 185, 129, 0.3)',
             borderRadius: 'var(--radius-lg)',
             padding: '1.5rem',
             display: 'flex',
@@ -702,7 +711,7 @@ export const LandingPage: React.FC = () => {
             <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: 600, textTransform: 'uppercase' }}>
               Plan Recomendado
             </span>
-            <h4 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'white', display: 'flex', alignItems: 'center', gap: '0.5rem', margin: '0.25rem 0' }}>
+            <h4 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '0.5rem', margin: '0.25rem 0' }}>
               FarmaFlow {planCalc.tier}
             </h4>
             <div style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)', display: 'flex', gap: '1rem' }}>
